@@ -1,5 +1,4 @@
 -----------------------------  ****** Section 2: SELECT Query *****--------------------------
-
 -- use MyDatabase
 USE MyDatabase;
 
@@ -38,7 +37,7 @@ FROM customers
 WHERE country = 'Germany'
 
 
--- Sorting the data with "Order By" 
+-- Sorting the data with "ORDER BY"  
 SELECT * 
 FROM customers
 ORDER BY score DESC
@@ -51,36 +50,36 @@ ORDER BY score ASC
 -- nested sorting 
 -- sort the results by the country and then by the highest score
 -- columns order in ORDER BY is crucial, as sorting is sequential
-select *
-from customers 
-order by country asc,score desc
+SELECT *
+FROM customers 
+ORDER BY country ASC,score DESC
 
--- GROUP BY (combines them) Aggregates the column by another column 
+-- GROUP BY (combines them) aggregates the column data with same column
 -- Find the total score for each country
-select country,
-sum(score) as total_score
-from customers 
-group by country
+SELECT country,
+sum(score) AS total_score
+FROM customers 
+GROUP BY country
 
 
--- The select columns must be used in group by clause
--- All the columns in the SELECT must be either "aggregated" or included in the GROUP BY clause
-select 
+-- The SELECT columns must be used in GROUP BY clause
+-- All the columns in the SELECT must be in either "aggregated" or included in the GROUP BY clause
+SELECT
 	country,
 	first_name,
-	sum(score) as total_score
-from customers 
-group by country,first_name
+	sum(score) AS total_score
+FROM customers 
+GROUP BY country,first_name
 
 -- Find the total score and total number of customers for each country 
-select 
+SELECT 
 	country,
-	sum(score) as total_score,
-	count(id) as total_customers
-from customers 
-group by country
+	sum(score) AS total_score,
+	count(id) AS total_customers
+FROM customers 
+GROUP BY country
 
-select * from customers
+SELECT * FROM customers
 
 -- *** HAVING *** -- 
 -- Filters the data after aggregation
@@ -95,54 +94,48 @@ HAVING sum(score) > 800
 
 
 -- WHERE caluse filter the data "before" aggregration 
--- GROUP BY HAVING filters the data "after" the aggregation
+-- GROUP BY combines the rows with same column
+-- HAVING clause filters the data "after" the aggregation
 /* 
 Find the average score from each country considering only customers with a score not equal to 0
 and return only those countires with an average score greater than 430
 */
 
-select 
+SELECT 
 country,
 avg(score) as avg_score
-from customers 
-where score != 0 
-group by country 
-having  avg(score) > 430  -- having clause takes only aggregated column
+FROM customers 
+WHERE score != 0 
+GROUP BY country 
+HAVING avg(score) > 430   --HAVING clause takes "only" aggregated columns
 
 -- Removing duplicates with "DISTINCT"
-select distinct 
+SELECT DISTINCT
 country 
-from customers 
+FROM customers 
 
-
-
--- TOP (limit) -- Restrict the number of rows 
+--TOP (limit) -- Restrict the number of rows 
 SELECT TOP 3 
 * 
 FROM customers 
 
-select top 5 
+SELECT TOP 5 
 * 
-from orders
-
-
+FROM orders
 
 -- Retrieve top 3 customers with highest scores 
-select top 3 *
-from customers 
-order by score desc
-
+SELECT TOP 3 *
+FROM customers 
+ORDER BY score DESC
 
 -- Retrieve the lowest 2 customers based on the score 
-select top 2 * 
-from customers 
-order by score asc
-
+SELECT TOP 2 * 
+FROM customers 
+ORDER BY score ASC
 
 -- Get 2 most recent orders 
-select top 2 * from orders
-order by order_date desc
-
+SELECT TOP 2 * FROM orders
+ORDER BY order_date DESC
 
 -- SQL query "coding order"
 SELECT DISTINCT TOP 2 
@@ -151,10 +144,8 @@ SUM(col2)
 FROM TABLE
 WHERE col1 = 1          -- WHERE clause filter rows before aggregations
 GROUP BY col1           -- GROUP BY combines the rows with same column
-HAVING SUM(col2) > 30   -- HAVING "condition" Filter rows after aggregations. HAVING clause is second type of filtering the data
-ORDER BY col1 ASC       -- ORDER BY used to sort the column
-
-
+HAVING SUM(col2) > 30   -- HAVING ("condition") clause filters rows after aggregations.HAVING clause is second type of filtering the data
+ORDER BY col1 ASC       -- ORDER BY clause is used to sort (ASC/DESC) of the column
 
 -- SQL query "execution order" 
 1. FROM 
@@ -164,7 +155,6 @@ ORDER BY col1 ASC       -- ORDER BY used to sort the column
 5. SELECT DISTINCT
 6. ORDER BY 
 7. TOP
-
 
 -- Multi queries 
 SELECT * 
