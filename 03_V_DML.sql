@@ -1,5 +1,4 @@
 ----------------- DATA MANIPULATION LANGUAGE (DML) ----------------------
-
 /*
 INSERT
 UPDATE
@@ -35,7 +34,7 @@ FROM customers
 
 SELECT * FROM persons;
 
---UPDATE 
+--UPDATE  (Do not miss WHERE condition)
 UPDATE table_name 
 SET col1=val1,
 	col2=val2
@@ -43,7 +42,7 @@ WHERE <condition>
 
 SELECT * FROM customers;
 
---TASK: Update NULL to "0" in customers table
+--TASK: Update score "NULL" to "0" in customers table
 UPDATE customers 
 SET score=0
 WHERE id=6;
@@ -56,13 +55,13 @@ UPDATE customers
 SET score=3000
 WHERE id=5;
 
---TASK: Upate country, score for id=9 (multiple columns update)
+--TASK: Upate country, score for id=9 (multiple columns update). 
 UPDATE customers
 SET score = 570,
 	country = 'Spain'
 WHERE id=9;
 
---DELETE
+--DELETE (DO NOT MISS WHERE condition. Otherwise whole table gets deleted)
 DELETE FROM table_name 
 WHERE <condition>
 
@@ -73,8 +72,8 @@ WHERE id > 5;
 --Delete all the data from table "persons". Delete command is slow as it need to check many things before delete.
 --TRUNCATE clears the whole table without checking or logging (structure is intact)
 
-DELETE FROM persons -- this will delete all the 
+DELETE FROM persons -- this will delete all the rows but slow to complete.
 
-TRUNCATE TABLE persons; 
+TRUNCATE TABLE persons;  -- TRUNCATE is much faster than DELETE
 
 SELECT * FROM persons;
