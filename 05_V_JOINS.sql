@@ -1,52 +1,41 @@
 --- JOINS ---
-
 /*
-Combine the columns from multiple tables called Joining the tables and put the columns side by side. Remember the results table is wider.
-Inner Join
-Full join 
-Left join
-Right join 
-
+Combine the columns from multiple tables called Joining the tables and put the columns side by side. Remember that results table is wider.
+INNER JOIN
+FULL JOIN
+LEFT JOIN
+RIGHT JOIN
 In order to join the table, we have to define a key column between the tables.
-*/
 
-
-/*  Combine the rows from two tables using SET operators (stack the rows from both tables). 
-Take the rows from table A and put it in results table then take table B rows then stack on table A rows.
-Here, the results table is longer vertically 
+To combine (stack the rows from both tables) the rows from two tables we have to use "SET operators"
+Take the rows from table A and put it in results table then take table B rows then stack on top of table A rows.
+Here, the results table grow vertically.
+To join tables using SET operators, tables should have exact number of columns.
 UNION
 UNION ALL
 EXCEPT (minus)
 INTERSECT
 
--- To join table using SET operators, tables should have exact number of columns.
-
-*/
-
 -- What is SQL joins? In order to query two tables, first we have to connect them. A common column need to exist in both (left & right) tables.
-
 -- Why do we need "joins" actually ? 
--- 1. To (re)combine the data from multile table to get a big picture of data
--- 2. Data enrichment (getting the extra data). For example customer (master table) and we have reference table (zip codes) so we can get enhanced customer table by adding zip codes.
--- 3. Check for existance (Filtering) - For ex: For some customers (table: customers) we have to check their orders in another table (orders table), that table is called "lookup table"
+-- 1. To (re)combine the data from multile tables to get a big picture of data
+-- 2. Data enrichment (getting the extra data). For ex: customer (master table) and we have reference table (zip codes) so we can get enhanced customers table by adding zip codes.
+-- 3. Check for existance (Filtering) For ex: For some customers we have to check their orders in another table (orders), that table is called "lookup table"
 
-/*
 -- Join types (Basics)
-No join 
-Inner join 
-Left join 
-Right join
-Full join 
+NO JOIN
+INNER JOIN
+FULL JOIN
+LEFT JOIN
 
 -- Advanced joins 
-Left anti join 
-Right anti join 
-Full anti join 
-cross join
-
+LEFT ANTI JOIN
+RIGHT ANTI JOIN
+FULL ANTI JOIN
+CROSS JOIN
 */
 
---NO JOIN : Returns data from tables without combining them.
+--NO JOIN : Returns data from all the tables without combining them.
 SELECT * FROM A;
 SELECT * FROM B;
 
@@ -54,25 +43,22 @@ SELECT * FROM B;
 SELECT * FROM customers;
 SELECT * FROM orders;
 
-
 --INNER JOIN : Returns only matching rows from both tables.Only common data.
-
 SELECT * FROM A
 [TYPE] JOIN B    -- if nothing mentioned for TYPE, default is INNER JOIN 
 
-SELECT * FROM A
+SELECT * 
+FROM A
 INNER JOIN B
 ON <condition>   --condition here how to match rows? 
 
-
-SELECT * FROM A
+SELECT *
+FROM A
 INNER JOIN B
-ON A.key = B.key  -- order of the query is important.
+ON A.key = B.key  -- order of the keys is important.
 
--- In INNER JOIN, order of table doesn't matter. since we get the same results, order is not important for INNER JOIN.
-
-/* Get all customers along with their orders, but only for customers who have placed any order" 
-*/
+-- In INNER JOIN, order of the table doesn't matter. since we get the same results, order is not important for INNER JOIN.
+--  Get all customers along with their orders, but only for customers who have placed any order" 
 
 SELECT * 
 FROM customers;
@@ -80,10 +66,17 @@ FROM customers;
 SELECT * 
 FROM orders;
 
+USE MyDatabase;
+
 SELECT * 
 FROM customers 
 INNER JOIN orders
 ON customers.id = orders.customer_id; 
+
+SELECT * 
+FROM customers 
+INNER JOIN orders 
+ON orders.customer_id = customers.id;
 
 -- or 
 
@@ -105,16 +98,7 @@ FROM customers
 INNER JOIN orders 
 ON customers.id = orders.customer_id;
 
-SELECT 
-	c.id,
-	c.first_name,
-	o.order_id,
-	o.sales
-FROM customers AS c
-INNER JOIN orders AS o
-ON c.id = o.customer_id;
-
--- if you change the tables, we get the same results.
+-- if you change the tables or if you change the order of keys also, we get the same results.
 SELECT 
 	c.id,
 	c.first_name,
@@ -124,15 +108,12 @@ FROM orders AS o
 INNER JOIN customers AS c 
 ON c.id = o.customer_id;
 
-
 --LEFT JOIN : All the rows from the left table and only matching from the right table. Left table is the primary source of the data.
-
--- Syntax:
--- The order of the tables is important 
+--The order of the tables is important here.
 
 SELECT * 
-FROM A       -- FROM clause uses the left table because this is the main table or starting table
-LEFT JOIN B  -- join with right table 
+FROM A          -- FROM clause uses the left table because this is the main table (or starting table)
+LEFT JOIN B     -- join with right table 
 ON A.key = B.key 
 
 --TASK:  Get all customers along with their orders, including those without orders.
