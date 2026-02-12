@@ -1,6 +1,6 @@
 /* ==============================================================================
    SQL SET Operations
--------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
    SQL set operations enable you to combine results from multiple queries
    into a single result set. This script demonstrates the rules and usage of
    set operations, including UNION, UNION ALL, EXCEPT, and INTERSECT.
