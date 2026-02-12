@@ -1,4 +1,4 @@
---- SQL JOINS ---
+----------------******SQL JOINS***** ------------
 /*
 Combine the columns from multiple tables called Joining the tables and put the columns side by side. Remember that results table is wider.
 INNER JOIN
