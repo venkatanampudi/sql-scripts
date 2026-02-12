@@ -141,8 +141,13 @@ SELECT
     LastName
 FROM Sales.Customers;
 
-/* TASK 5: 
-   Combine order data from Orders and OrdersArchive into one report without duplicates 
+/* TASK 5: Analyzing the data
+   Combine order data from Orders and OrdersArchive into one report without duplicates
+   -- Combine the similar information before analyzing the data 
+-- For example we have employees, customers, suppliers, students tables 
+-- Combine them into one bigtable using UNION then write a SQL query and copy the results into reporting table 
+
+--Another use case: If you have orders tables such as orders2022, orders2023,orders2024,orders2025 and combine all them into "orders" table using UNION
 */
 SELECT
     'Orders' AS SourceTable,
@@ -176,3 +181,23 @@ SELECT
     CreationTime
 FROM Sales.OrdersArchive
 ORDER BY OrderID;
+
+
+/* 
+Delta Detection : Identifying the differences or changes (delta) between two batches of data 
+
+Use EXCEPT to check differences between two tables or between databases (data completeness check)
+*/
+
+/*
+SET operators summary:
+Combine the results of multiplel queries into a single results set
+Types: UNION, UNION ALL, EXCEPT, INTERSECT 
+Rules: Same no.of columns, data types, order of columns 
+        1st query control the column names (aliases)
+
+UseCases:
+Combine information (UNION & UNION ALL)
+Delta Detection: using EXCEPT
+Data completeness check: using EXCEPT
+*/
