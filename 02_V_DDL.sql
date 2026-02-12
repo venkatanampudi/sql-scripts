@@ -1,4 +1,4 @@
------------------------------  ****** Section 3: Data Definition Language(DDL)*****--------------------------
+-----------------------------  ******Section 3: Data Definition Language(DDL)*****--------------------------
 /*
 CREATE table
 ALTER table
