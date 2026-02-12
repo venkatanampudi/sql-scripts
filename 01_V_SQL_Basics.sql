@@ -1,7 +1,6 @@
 -----------------------------  ****** Section 2: SELECT Query *****--------------------------
 -- use MyDatabase
 USE MyDatabase;
-
 /* 
 This is a
 multi line 
